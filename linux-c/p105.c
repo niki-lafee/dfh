@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  secret_code.c
+ *       Filename:  p105.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2014年06月16日 20时34分37秒
+ *        Created:  2014年07月14日 19时28分02秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,38 +16,42 @@
  * =====================================================================================
  */
 
+//将字符串对调并显示
+//将字符串对调并显示
+//将字符串对调并显示
+//将字符串对调并显示
+//将字符串对调并显示
+
+
+
 #include <unistd.h>
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <curses.h>
-//#define SECRET dfh1995
 
-/*int main(void)
+int main(int argc, char *argv[])
 {
-	char *keyptr;
-	char *secret = "dfh1995";
+	char str[] = "dasfa3423xvxd";
+	char *p, *q, *temp;
+	int length = strlen (str);
 
-	keyptr = getpass ("input the passwd :");
+	p = str;
+	q = p + length - 1;
 
-	//printf ("your passwd is : %s\n",keyptr);
+	while (p < q) {
+	
+		*temp = *p;
+		*p = *q;
+		*q = *temp;
 
-	if (strcmp (secret, keyptr) == 0) {
-	
-		printf ("\nCan open the file~  \n");
-		exit (1);
-	
-	}
-	
-	else  {
-	
-		printf ("\nPasswd error! can not open. \n");
-		exit (0);
+		q--;
+		p++;
 	
 	}
 
+	printf ("The string is:%s\n", str);
+
+	return EXIT_SUCCESS;
 }
-*/
-
 

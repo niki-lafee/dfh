@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  secret_code.c
+ *       Filename:  p139.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2014年06月16日 20时34分37秒
+ *        Created:  2014年07月14日 21时24分52秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -21,33 +21,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <curses.h>
-//#define SECRET dfh1995
 
-/*int main(void)
+int func (int );
+
+int main(int argc, char *argv[])
 {
-	char *keyptr;
-	char *secret = "dfh1995";
+	int x;
 
-	keyptr = getpass ("input the passwd :");
-
-	//printf ("your passwd is : %s\n",keyptr);
-
-	if (strcmp (secret, keyptr) == 0) {
+	printf ("Please input x:\n");
+	scanf ("%d", &x);
+	printf ("Ruturn count:%d\n", func(x));
 	
-		printf ("\nCan open the file~  \n");
-		exit (1);
+	return EXIT_SUCCESS;
+}
+
+int func (int x) {
+
+	int count = 0;
+
+	while (x) {
+	
+		count++;
+		x = x & (x - 1);
 	
 	}
-	
-	else  {
-	
-		printf ("\nPasswd error! can not open. \n");
-		exit (0);
-	
-	}
+
+	return count;
 
 }
-*/
-
-

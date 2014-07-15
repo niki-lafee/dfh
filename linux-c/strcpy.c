@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  secret_code.c
+ *       Filename:  strcpy.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2014年06月16日 20时34分37秒
+ *        Created:  2014年07月14日 19时49分02秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -21,33 +21,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <curses.h>
-//#define SECRET dfh1995
 
-/*int main(void)
+char *strcpy (char *, char *);
+
+int main(int argc, char *argv[])
 {
-	char *keyptr;
-	char *secret = "dfh1995";
+	char *str = "dfsgsdac4545xs";
+	char *p = NULL;
 
-	keyptr = getpass ("input the passwd :");
+	p = (str, p);
 
-	//printf ("your passwd is : %s\n",keyptr);
+	puts (p);
 
-	if (strcmp (secret, keyptr) == 0) {
-	
-		printf ("\nCan open the file~  \n");
-		exit (1);
-	
-	}
-	
-	else  {
-	
-		printf ("\nPasswd error! can not open. \n");
-		exit (0);
-	
-	}
-
+	return EXIT_SUCCESS;
 }
-*/
 
+char *strcpy (char *dest, char *scr) {
 
+	char *ret_string;
+
+	if (dest == NULL ) {
+	
+		printf ("error!\n");
+		return NULL;
+	
+	}
+
+	ret_string = scr;
+
+	while ((*scr++ = *dest++) != '\0');
+
+	return ret_string;
+}

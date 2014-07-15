@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  secret_code.c
+ *       Filename:  p103.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2014年06月16日 20时34分37秒
+ *        Created:  2014年07月14日 15时11分28秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -21,33 +21,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <curses.h>
-//#define SECRET dfh1995
 
-/*int main(void)
+char *retmemory ();
+
+int main(int argc, char *argv[])
 {
-	char *keyptr;
-	char *secret = "dfh1995";
+	char *str = NULL;
 
-	keyptr = getpass ("input the passwd :");
+	str = retmemory ();
 
-	//printf ("your passwd is : %s\n",keyptr);
+//	printf ("%s\n", str);
+//	printf (str);
+	puts (str);
 
-	if (strcmp (secret, keyptr) == 0) {
-	
-		printf ("\nCan open the file~  \n");
-		exit (1);
-	
-	}
-	
-	else  {
-	
-		printf ("\nPasswd error! can not open. \n");
-		exit (0);
-	
-	}
-
+	return EXIT_SUCCESS;
 }
-*/
 
+char *retmemory () {
 
+	char *p = "hello world";
+
+	return p;
+}
