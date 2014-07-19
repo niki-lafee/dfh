@@ -33,11 +33,12 @@
 #define PARAM_NONE 0 	//无参数
 #define PARAM_A 1 	//-a：显示所有文件
 #define PARAM_L 2 	//-l：一行只显示一个文件的详细信息
+#define PARAM_M 4 	//-m：横向输出文件名，以","为分隔
 #define MAXROWLEN 80 	//一行显示的最多字符数
 
 void my_err (const char *err_string, int line); 	//自定义的错误处理函数，打印出错误所在行的行数和错误信息
 void display_attribute (struct stat buf, char *name); 	//获取文件属性
-void display_single (char *name); 			//在没有-l 选项时，打印一个文件名，打印时上下对齐
+void display_single (int flag_param, char *name); 			//在没有-l 选项时，打印一个文件名，打印时上下对齐
 void display (int flag, char *pathname); 		/*
 							 * 	根据命令行参数和完整路径名显示目标文件
 							 * 	参数flag： 命令行参数
@@ -56,10 +57,10 @@ int main(int argc, char **argv)
 	int flag_param = PARAM_NONE; 		//参数种类， -l，-a
 	struct stat buf; 			//保存文件状态信息的结构体
 
-	//命令行参数解析，-l, -a, -al, -la
+	//命令行参数解析，-l, -a, -al, -la, m, am, lm, lam
 	j = 0;
 	num = 0;
-	for (i = 1; i < argc; i++) {
+	for (i = 1; i < 9; i++) {
 	
 		if (argv[i][0] == '-') {
 		
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
 	
 	}
 
-	//只支持参数 -a 和 -l，若有其他的，报错
+	//只支持参数 -a , -m 和 -l，若有其他的，报错
 	for (i = 0; i < j; i++) {
 	
 		if (param[i] == 'a') {
@@ -89,6 +90,12 @@ int main(int argc, char **argv)
 		
 			flag_param |= PARAM_L;
 			continue;
+		
+		}
+
+		if (param[i] == 'm') {
+		
+			flag_param |= PARAM_M;
 		
 		}
 
@@ -171,12 +178,13 @@ void my_err (const char *err_string, int line) {
 }
 
 //在没有使用 -l 选项时， 打印一个文件名，上下对齐
-void display_single (char *name) {
+void display_single (int flag_param, char *name) {
 
 	int i, len;
 
+	//判断是否有 -l 选项
 	//若本行不足以打印一个文件
-	if (g_leave_len < g_maxlen) {
+	if  (((flag_param & PARAM_M) == 0) && (g_leave_len < g_maxlen)) {
 	
 		printf ("\n");
 		g_leave_len = MAXROWLEN;
@@ -382,7 +390,7 @@ void display_attribute (struct stat buf, char *name) {
  */
 void display (int flag, char *pathname) {
 
-	int i, j;
+	int i, j, flag_param = flag;
 	struct stat buf;
 	char name[NAME_MAX + 1];
 
@@ -413,12 +421,20 @@ void display (int flag, char *pathname) {
 		case PARAM_NONE: 	//无 -l, -a;
 			if (name[0] != '.') {
 			
-				display_single (name);
+				display_single (flag_param, name);
 			
 			}
 			break;
 		case PARAM_A:  		//-a;
-			display_single (name);
+			display_single (flag_param, name);
+			break;
+		case PARAM_M: 		//-m;
+			if (name[0] != '.') {
+
+				display_single (flag_param, name);
+				printf (" , ");
+
+			}
 			break;
 		case PARAM_L: 		//-l;
 			if (name[0] != '.') {
