@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  test.c
+ *       Filename:  unixp2.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2014年07月18日 09时22分57秒
+ *        Created:  2014年07月22日 14时42分17秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -22,11 +22,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	printf ("HELLO ");
-	sleep (1*6*5);
-	printf ("WORLD!\n");
+	int c;
+	while ((c = getchar ()) != EOF) {
+	
+		putchar (c);
+	
+	}
 
 	return EXIT_SUCCESS;
 }

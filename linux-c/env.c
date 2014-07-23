@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  test.c
+ *       Filename:  env.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2014年07月18日 09时22分57秒
+ *        Created:  2014年07月22日 16时34分32秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -21,12 +21,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <malloc.h>
 
-int main(int argc, char **argv)
+extern char **environ;
+
+int main(int argc, char *argv[])
 {
-	printf ("HELLO ");
-	sleep (1*6*5);
-	printf ("WORLD!\n");
+	int i;
+
+	printf ("Argument: \n");
+	for (i = 0; i < argc; i++) {
+	
+		printf ("argv[%d] is %s\n", i, argv[i]);
+	
+	}
+
+	printf ("Environment: \n");
+
+	for (i = 0; environ[i] != NULL; i++) {
+	
+		printf ("%s\n", environ[i]);
+	
+	}
 
 	return EXIT_SUCCESS;
 }

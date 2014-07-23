@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  test.c
+ *       Filename:  fork3.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2014年07月18日 09时22分57秒
+ *        Created:  2014年07月21日 11时58分09秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -21,12 +21,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	printf ("HELLO ");
-	sleep (1*6*5);
-	printf ("WORLD!\n");
+	pid_t pid;
+
+	pid = fork();
+	switch(pid) {
+	
+		case 0:
+			while (1) {
+			
+				printf ("A background process, PID: %d, ParentID:%d.\n", getpid(), getppid());
+				sleep (3);
+
+			
+			}
+		case -1:
+			perror ("Process creation failed!\n");
+			exit (-1);
+		default:
+			printf ("I am parent process, my pid is %d\n", getpid());
+			exit (0);
+	
+	}
 
 	return EXIT_SUCCESS;
 }
